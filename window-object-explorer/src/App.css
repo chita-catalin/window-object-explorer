@@ -3,20 +3,7 @@ body {
   scrollbar-gutter: stable both-edges;
 }
 
-.object-card {
-  height: fit-content;
-  margin: 10px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  word-break: break-all;
-  cursor: pointer;
-  transition: 0.2s;
-  border:1px solid black;
-}
-
 .object-card:hover {
-  background-color: darkgrey;
+  scale: 1.05;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }

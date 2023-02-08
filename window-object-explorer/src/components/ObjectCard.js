@@ -11,7 +11,10 @@ const ObjectCard = ({
   return (
     <>
       <div
+        className="object-card"
         style={{
+          wordBreak: "break-all",
+          width: "250px",
           height: "fit-content",
           display: "flex",
           flexDirection: "row",
@@ -19,6 +22,17 @@ const ObjectCard = ({
           margin: "5px",
           flexGrow: 1,
           cursor: "pointer",
+          backgroundColor:
+            typeof mappedObject[objectName] === "object"
+              ? "#fff7f0"
+              : typeof mappedObject[objectName] === "function"
+              ? "#f0f7ff"
+              : typeof mappedObject[objectName] === "boolean"
+              ? "#fff0fc"
+              : typeof mappedObject[objectName] === "string"
+              ? "#efffe8"
+              : "#ffffff",
+          transition: "0.1s",
         }}
         onClick={() => {
           setMappedObject(mappedObject[objectName]);
@@ -90,9 +104,7 @@ const ObjectCard = ({
           {/*Boolean*/}
           <div
             style={{
-              backgroundImage:
-                "linear-gradient(to left, #ffffff, #ddfcdc)",
-                borderRadius: "0px 5px 5px 0px",
+              borderRadius: "0px 5px 5px 0px",
             }}
           >
             {extended && typeof mappedObject[objectName] === "boolean" && (

@@ -161,24 +161,93 @@ function App() {
         }}
       >
         {objectToMap &&
-          keys.map((key) => {
-            if (
-              (dataTypes.objects && typeof objectToMap[key] === "object") ||
-              (dataTypes.functions && typeof objectToMap[key] === "function") ||
-              (dataTypes.strings && typeof objectToMap[key] === "string") ||
-              (dataTypes.numbers && typeof objectToMap[key] === "number") ||
-              (dataTypes.booleans && typeof objectToMap[key] === "boolean")
-            ) {
-              return (
-                <ObjectCard
-                  objectName={key}
-                  mappedObject={objectToMap}
-                  setMappedObject={setObjectToMap}
-                  setBreadCrumbs={setBreadCrumbs}
-                />
-              );
-            }
-          })}
+          keys
+            .sort(
+              //sort by data type
+              (a, b) => {
+                //order by data type: object,function,string,boolean,number
+                if (
+                  typeof objectToMap[a] === "object" &&
+                  typeof objectToMap[b] !== "object"
+                ) {
+                  return -1;
+                }
+                if (
+                  typeof objectToMap[a] !== "object" &&
+                  typeof objectToMap[b] === "object"
+                ) {
+                  return 1;
+                }
+                if (
+                  typeof objectToMap[a] === "function" &&
+                  typeof objectToMap[b] !== "function"
+                ) {
+                  return -1;
+                }
+                if (
+                  typeof objectToMap[a] !== "function" &&
+                  typeof objectToMap[b] === "function"
+                ) {
+                  return 1;
+                }
+                if (
+                  typeof objectToMap[a] === "string" &&
+                  typeof objectToMap[b] !== "string"
+                ) {
+                  return -1;
+                }
+                if (
+                  typeof objectToMap[a] !== "string" &&
+                  typeof objectToMap[b] === "string"
+                ) {
+                  return 1;
+                }
+                if (
+                  typeof objectToMap[a] === "boolean" &&
+                  typeof objectToMap[b] !== "boolean"
+                ) {
+                  return -1;
+                }
+                if (
+                  typeof objectToMap[a] !== "boolean" &&
+                  typeof objectToMap[b] === "boolean"
+                ) {
+                  return 1;
+                }
+                if (
+                  typeof objectToMap[a] === "number" &&
+                  typeof objectToMap[b] !== "number"
+                ) {
+                  return -1;
+                }
+                if (
+                  typeof objectToMap[a] !== "number" &&
+                  typeof objectToMap[b] === "number"
+                ) {
+                  return 1;
+                }
+                return 0;
+              }
+            )
+            .map((key) => {
+              if (
+                (dataTypes.objects && typeof objectToMap[key] === "object") ||
+                (dataTypes.functions &&
+                  typeof objectToMap[key] === "function") ||
+                (dataTypes.strings && typeof objectToMap[key] === "string") ||
+                (dataTypes.numbers && typeof objectToMap[key] === "number") ||
+                (dataTypes.booleans && typeof objectToMap[key] === "boolean")
+              ) {
+                return (
+                  <ObjectCard
+                    objectName={key}
+                    mappedObject={objectToMap}
+                    setMappedObject={setObjectToMap}
+                    setBreadCrumbs={setBreadCrumbs}
+                  />
+                );
+              }
+            })}
       </div>
     </div>
   );
